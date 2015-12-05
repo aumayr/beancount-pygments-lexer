@@ -13,7 +13,7 @@ import re
 
 from pygments.lexer import RegexLexer, bygroups, default, words, include
 from pygments.token import Text, Comment, Operator, Keyword, Name, String, \
-    Number, Punctuation, Literal
+    Number, Punctuation, Literal, Whitespace
 
 class BeancountLexer(RegexLexer):
     """
@@ -29,34 +29,44 @@ class BeancountLexer(RegexLexer):
 
     tokens = {
         'root': [
-            # Text
-            # (r'[ \t]+', Text),
-            # (r'\.\.\n', Text),  # Line continuation
+            (r'\s+', Whitespace),
+
+            # Accounts
+            (r'(?<=:)([A-Z][A-Za-z0-9\-]+)(:)?', bygroups(Punctuation, Name.Variable)),
+            (r'([A-Z][A-Za-z0-9\-]+)(:)', bygroups(Name.Constant, Punctuation)),
+
+            # Tags
+            (r'(#)([A-Za-z0-9\-]+)', bygroups(Punctuation, Name.Variable)),
+
+            # Options/Events
+            (r'(option|event)(\s+)("\w*")(\s+)("[\w\s]*")', bygroups(Keyword.Reserved, Whitespace, Name.Variable, Whitespace, String)),   # Option directives
+
+            # Directives
+            (r'(\*)?(\s)*(".*")(\s)*(\|)?(\s)*(".*")', bygroups(Keyword.Reserved, Whitespace, Name.Variable, Whitespace, Keyword.Reserved, Whitespace, String)),
+
+            # Metadata
+            (r'(\w+)(:)(\s+)', bygroups(Name.Variable, Punctuation, Whitespace)),
+
+            # Strings
+            (r'(".*")', String),
+
+            # Dates
+            (r'([0-9]{4})(\-)([0-9]{2})(\-)([0-9]{2})', bygroups(Number.Integer, Punctuation, Number.Integer, Punctuation, Number.Integer)),
+
             # Comments
             (r";.*", Comment.Single),
+            (r"#.*", Comment.Single),
             (r"\*.*", Comment.Single),
-            (r"#!.*", Comment.Hashbang),
-            (r'([A-Z][A-Za-z0-9\-]+)(:)', bygroups(Name.Constant, Punctuation)),   # Root Accounts
-            (r'([:]?)([A-Z][A-Za-z0-9\-]+)', bygroups(Name.Namesepace, Punctuation)),   # Accounts
-            (r'([a-z][A-Za-z0-9\-\_]+)(:)', bygroups(Name.Variable.Class, Name.Variable)),   # Metadata
-            (r"\".*\"", String),
-            # (r'^(option)\s*(\".*\")\s*(\".*\")\s*', bygroups(Keyword.Reserved, Name.Variable, String)),   # Option directives
-            (r"\s([A-Z][A-Z0-9\'\.\_\-]{0,10}[A-Z0-9])[\,?|\s]", Literal),    # Currencies
-            (r'([0-9]{4})(\-)([0-9]{2})(\-)([0-9]{2})', bygroups(Number.Integer, Punctuation, Number.Integer, Punctuation, Number.Integer)),   # Dates
-            (r'([\-|\+]?)([\d]+[\.]?[\d]*)', bygroups(Number, Name.Other)),   # Numbers
 
             # Numbers
-            # (r'[0-9]+\.[0-9]*(?!\.)', Number.Float),
-            # # Other
-            # (r'[(),.:\[\]]', Punctuation),
-            # (r'(?:#[\w \t]*)', Name.Label),
-            # (r'(?:\?[\w \t]*)', Comment.Preproc),
-            # Identifiers
-            # (r'(option)\s*(\".*\")\s*(\".*\")\s*', Keyword.Reserved),
+            (r'(\-?)([0-9]+\.?[0-9]*(?!\.))', bygroups(Punctuation, Number.Float)),
+            (r'([A-Z]+)', Name.Label),
+            (r'([{}])', Punctuation),
+
             # Keywords
             (words((
-                'open', 'close', 'pad', 'balance', 'note', 'price', 'event', 'document'), prefix=r'\b', suffix=r'\b'),
-             Keyword.Type),
+                'open', 'close', 'pad', 'balance', 'note', 'price', 'event', 'document', 'pushtag', 'poptag'), prefix=r'\b', suffix=r'\b'),
+             Keyword.Reserved),
             (words((
                 'option', 'commodity'), prefix=r'\b', suffix=r'\b'),
              Keyword.Reserved)
