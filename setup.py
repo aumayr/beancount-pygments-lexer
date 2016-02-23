@@ -22,7 +22,10 @@ setup(name='beancount-pygments-lexer',
       author=author,
       author_email=author_email,
       license='MIT',
-      packages=['beancount_pygments_lexer'],
+      packages=[
+            'beancount_pygments_lexer',
+            'beancount_pygments_lexer.util'
+      ],
       install_requires=[
             'pygments>=2.0.2',
       ],

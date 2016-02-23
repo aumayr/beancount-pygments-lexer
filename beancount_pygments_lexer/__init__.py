@@ -15,9 +15,12 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 from .lexer import BeancountLexer
+from .util.version import get_version
+
+VERSION = (0, 1, 1, '', 0)
 
 __url__             = "http://github.com/aumayr/beancount-pygments-lexer"
-__version__         = "0.1.0"
+__version__         = get_version(VERSION)
 __license__         = "MIT"
 __author__          = "Dominik Aumayr"
 __author_email__    = "dominik@aumayr.name"
