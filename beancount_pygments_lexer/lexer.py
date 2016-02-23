@@ -5,7 +5,7 @@
 
     Lexers for beancount-files.
 
-    :copyright: Copyright 2015 by Dominik Aumayr (dominik@aumayr.name)
+    :copyright: Copyright 2015-2016 by Dominik Aumayr (dominik@aumayr.name)
     :license: MIT
 """
 

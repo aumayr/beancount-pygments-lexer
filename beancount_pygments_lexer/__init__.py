@@ -2,7 +2,7 @@
 """
     Pygments Beancount Lexer – A Beancount lexer for Pygments to
     highlight Beancount code snippets.
-    Copyright ©  2015 Dominik Aumayr <dominik@aumayr.name>
+    Copyright ©  2015-2016 Dominik Aumayr <dominik@aumayr.name>
     Licensed under the MIT License.
     You may not use this file except in compliance with the License.
 
@@ -17,7 +17,7 @@ from __future__ import absolute_import, unicode_literals, print_function
 from .lexer import BeancountLexer
 
 __url__             = "http://github.com/aumayr/beancount-pygments-lexer"
-__version__         = "0.1.0a1"
+__version__         = "0.1.0"
 __license__         = "MIT"
 __author__          = "Dominik Aumayr"
 __author_email__    = "dominik@aumayr.name"

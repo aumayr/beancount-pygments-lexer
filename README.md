@@ -1,5 +1,12 @@
 # beancount pygments Lexer
 
-[pygments](http://pygments.org)-Lexer for [beancount](http://furius.ca/beancount/)-files.
+[pygments](http://pygments.org)-Lexer for
+[beancount](http://furius.ca/beancount/)-files.
 
-**Caution**: This is far from finished. Consider it *alpha*-software. Contributions are very welcome :-)
+## TODO
+
+- [ ] Rework matching-rules
+- [ ] Add test cases
+
+**Caution**: This is far from finished. Consider it *beta*-software.
+Contributions are very welcome :-)
