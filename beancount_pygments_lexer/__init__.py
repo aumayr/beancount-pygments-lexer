@@ -14,10 +14,9 @@
 """
 from __future__ import absolute_import, unicode_literals, print_function
 
-from .lexer import BeancountLexer
 from .util.version import get_version
 
-VERSION = (0, 1, 1, '', 0)
+VERSION = (0, 1, 2, '', 0)
 
 __url__             = "http://github.com/aumayr/beancount-pygments-lexer"
 __version__         = get_version(VERSION)
