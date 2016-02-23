@@ -24,7 +24,7 @@ class BeancountLexer(RegexLexer):
 
     name = 'Beancount'
     aliases = ['beancount', 'ledger']
-    filenames = ['*.beancount', '*.ledger']
+    filenames = ['*.beancount', '*.ledger', '*.bean']
     mimetypes = ['text/x-beancount']
 
     tokens = {
